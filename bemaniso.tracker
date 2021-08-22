@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<trackerinfo type="bemaniso" shortName="Sows" longName="Bemaniso" siteName="bemaniso.ws" follow302links="true">
+
+	<settings>
+		<gazelle_description/>
+		<gazelle_authkey/>
+		<gazelle_torrent_pass/>
+
+	</settings>
+
+	<servers>
+		<server network="Bemaniso" serverNames="irc.bemaniso.ws" channelNames="#bemaniso" announcerNames="cindy"/>
+	</servers>
+
+	<parseinfo>
+		<linepatterns>
+			<extract>
+				<!--
+				11:19 PM  <cindy> Yasunori Mitsuda - Xenoblade 2 Original Soundtrack [2018] [Soundtrack] - FLAC / Lossless / WEB - https://bemaniso.ws/torrents.php?id=14083 / https://bemaniso.ws/torrents.php?action=download&id=27303 - ost
+				4:23 PM  <cindy> Yoko Shimomura - KINGDOM HEARTS Original Soundtrack COMPLETE [2007] [Soundtrack] - MP3 / V0 (VBR) / CD - https://bemaniso.ws/torrents.php?id=14734 / https://bemaniso.ws/torrents.php?action=download&id=27321 - ost
+				4:24 PM  <cindy> Yoko Shimomura - KINGDOM HEARTS Original Soundtrack COMPLETE [2007] [Soundtrack] - MP3 / 320 / CD - https://bemaniso.ws/torrents.php?id=14734 / https://bemaniso.ws/torrents.php?action=download&id=27322 - ost
+			-->
+				<regex value="(.*) -(.*)https?://.* / (https?://.*id=\d+)"/>
+				<vars>
+					<var name="torrentName"/>
+					<var name="tags"/>
+					<var name="$baseUrl"/>
+				</vars>
+			</extract>
+		</linepatterns>
+
+		<linematched>
+			<var name="torrentUrl">
+				<var name="$baseUrl"/>
+				<string value="&amp;authkey="/>
+				<var name="authkey"/>
+				<string value="&amp;torrent_pass="/>
+				<var name="torrent_pass"/>
+			</var>
+		</linematched>
+		<ignore>
+		</ignore>
+	</parseinfo>
+</trackerinfo>
